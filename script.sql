@@ -1,0 +1,27 @@
+
+CREATE TABLE Categories(
+CategoryId INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+CategoryName VARCHAR(50) NOT NULL,
+CategoryDescription VARCHAR(200) NOT NULL,
+CategoryPicture VARBINARY(MAX) NULL
+)
+
+GO
+CREATE TABLE QuantityPerUnits
+(
+QuantityPerUnitId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+QuantityPerUnitName VARCHAR(50) NOT NULL,
+)
+GO
+CREATE TABLE Products
+(
+ProductId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+ProductName VARCHAR(100) NOT NULL,
+CategoryId INT NOT NULL  FOREIGN KEY (CategoryId) REFERENCES Categories(CategoryId),
+QuantityPerUnitId  INT NOT NULL  FOREIGN KEY (QuantityPerUnitId) REFERENCES QuantityPerUnits(QuantityPerUnitId),
+UnitPrice DECIMAL (18,2) NOT NULL,
+UnitInStock INT NOT NULL DEFAULT 0,
+MaxStock INT NOT NULL,
+MinStock INT NOT NULL DEFAULT 0,
+)
+
