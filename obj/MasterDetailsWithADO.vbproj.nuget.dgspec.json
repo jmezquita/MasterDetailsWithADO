@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GitHub\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj": {}
+    "C:\\GitLab\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj": {}
   },
   "projects": {
-    "C:\\GitHub\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj": {
+    "C:\\GitLab\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitHub\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj",
+        "projectUniqueName": "C:\\GitLab\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj",
         "projectName": "MasterDetailsWithADO",
-        "projectPath": "C:\\GitHub\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj",
+        "projectPath": "C:\\GitLab\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj",
         "packagesPath": "C:\\Users\\jmgys.DESKTOP-HMIIL8C\\.nuget\\packages\\",
-        "outputPath": "C:\\GitHub\\Microsoft\\VB\\MasterDetailsWithADO\\obj\\",
+        "outputPath": "C:\\GitLab\\Microsoft\\VB\\MasterDetailsWithADO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Y6REq8M+v8TjWjE+ckJEZeuQnvVLI5z0+PQmJVmkv2oub1xIUZQyiLFCkk+3NQxJaXL6zuAHvnYreL1QMOaIDQ==",
+  "dgSpecHash": "889L37W7p/fCsjdtj/yMWl/LbqoYYNWQpQktgkf/AUzUVv9wkMuTXZf/EsjkJ5YlC+3b84CYTKfFkbHvLWJwiA==",
   "success": true,
-  "projectFilePath": "C:\\GitHub\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj",
+  "projectFilePath": "C:\\GitLab\\Microsoft\\VB\\MasterDetailsWithADO\\MasterDetailsWithADO.vbproj",
   "expectedPackageFiles": [
     "C:\\Users\\jmgys.DESKTOP-HMIIL8C\\.nuget\\packages\\autofac\\6.3.0\\autofac.6.3.0.nupkg.sha512",
     "C:\\Users\\jmgys.DESKTOP-HMIIL8C\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.0\\microsoft.extensions.configuration.6.0.0.nupkg.sha512",

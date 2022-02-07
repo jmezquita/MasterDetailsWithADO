@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Categories" msprop:Generator_TableClassName="CategoriesDataTable" msprop:Generator_TableVarName="tableCategories" msprop:Generator_TablePropName="Categories" msprop:Generator_RowDeletingName="CategoriesRowDeleting" msprop:Generator_RowChangingName="CategoriesRowChanging" msprop:Generator_RowEvHandlerName="CategoriesRowChangeEventHandler" msprop:Generator_RowDeletedName="CategoriesRowDeleted" msprop:Generator_UserTableName="Categories" msprop:Generator_RowChangedName="CategoriesRowChanged" msprop:Generator_RowEvArgName="CategoriesRowChangeEvent" msprop:Generator_RowClassName="CategoriesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CategoryId" msprop:Generator_ColumnVarNameInTable="columnCategoryId" msprop:Generator_ColumnPropNameInRow="CategoryId" msprop:Generator_ColumnPropNameInTable="CategoryIdColumn" msprop:Generator_UserColumnName="CategoryId" type="xs:int" minOccurs="0" />
+              <xs:element name="CategoryName" msprop:Generator_ColumnVarNameInTable="columnCategoryName" msprop:Generator_ColumnPropNameInRow="CategoryName" msprop:Generator_ColumnPropNameInTable="CategoryNameColumn" msprop:Generator_UserColumnName="CategoryName" type="xs:string" minOccurs="0" />
+              <xs:element name="CategoryDescription" msprop:Generator_ColumnVarNameInTable="columnCategoryDescription" msprop:Generator_ColumnPropNameInRow="CategoryDescription" msprop:Generator_ColumnPropNameInTable="CategoryDescriptionColumn" msprop:Generator_UserColumnName="CategoryDescription" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="QuantityPerUnits" msprop:Generator_TableClassName="QuantityPerUnitsDataTable" msprop:Generator_TableVarName="tableQuantityPerUnits" msprop:Generator_TablePropName="QuantityPerUnits" msprop:Generator_RowDeletingName="QuantityPerUnitsRowDeleting" msprop:Generator_RowChangingName="QuantityPerUnitsRowChanging" msprop:Generator_RowEvHandlerName="QuantityPerUnitsRowChangeEventHandler" msprop:Generator_RowDeletedName="QuantityPerUnitsRowDeleted" msprop:Generator_UserTableName="QuantityPerUnits" msprop:Generator_RowChangedName="QuantityPerUnitsRowChanged" msprop:Generator_RowEvArgName="QuantityPerUnitsRowChangeEvent" msprop:Generator_RowClassName="QuantityPerUnitsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="QuantityPerUnitId" msprop:Generator_ColumnVarNameInTable="columnQuantityPerUnitId" msprop:Generator_ColumnPropNameInRow="QuantityPerUnitId" msprop:Generator_ColumnPropNameInTable="QuantityPerUnitIdColumn" msprop:Generator_UserColumnName="QuantityPerUnitId" type="xs:int" minOccurs="0" />
+              <xs:element name="QuantityPerUnitName" msprop:Generator_ColumnVarNameInTable="columnQuantityPerUnitName" msprop:Generator_ColumnPropNameInRow="QuantityPerUnitName" msprop:Generator_ColumnPropNameInTable="QuantityPerUnitNameColumn" msprop:Generator_UserColumnName="QuantityPerUnitName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Products" msprop:Generator_TableClassName="ProductsDataTable" msprop:Generator_TableVarName="tableProducts" msprop:Generator_TablePropName="Products" msprop:Generator_RowDeletingName="ProductsRowDeleting" msprop:Generator_RowChangingName="ProductsRowChanging" msprop:Generator_RowEvHandlerName="ProductsRowChangeEventHandler" msprop:Generator_RowDeletedName="ProductsRowDeleted" msprop:Generator_UserTableName="Products" msprop:Generator_RowChangedName="ProductsRowChanged" msprop:Generator_RowEvArgName="ProductsRowChangeEvent" msprop:Generator_RowClassName="ProductsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProductId" msprop:Generator_ColumnVarNameInTable="columnProductId" msprop:Generator_ColumnPropNameInRow="ProductId" msprop:Generator_ColumnPropNameInTable="ProductIdColumn" msprop:Generator_UserColumnName="ProductId" type="xs:int" minOccurs="0" />
+              <xs:element name="ProductName" msprop:Generator_ColumnVarNameInTable="columnProductName" msprop:Generator_ColumnPropNameInRow="ProductName" msprop:Generator_ColumnPropNameInTable="ProductNameColumn" msprop:Generator_UserColumnName="ProductName" type="xs:string" minOccurs="0" />
+              <xs:element name="CategoryId" msprop:Generator_ColumnVarNameInTable="columnCategoryId" msprop:Generator_ColumnPropNameInRow="CategoryId" msprop:Generator_ColumnPropNameInTable="CategoryIdColumn" msprop:Generator_UserColumnName="CategoryId" type="xs:int" minOccurs="0" />
+              <xs:element name="QuantityPerUnitId" msprop:Generator_ColumnVarNameInTable="columnQuantityPerUnitId" msprop:Generator_ColumnPropNameInRow="QuantityPerUnitId" msprop:Generator_ColumnPropNameInTable="QuantityPerUnitIdColumn" msprop:Generator_UserColumnName="QuantityPerUnitId" type="xs:int" minOccurs="0" />
+              <xs:element name="UnitPrice" msprop:Generator_ColumnVarNameInTable="columnUnitPrice" msprop:Generator_ColumnPropNameInRow="UnitPrice" msprop:Generator_ColumnPropNameInTable="UnitPriceColumn" msprop:Generator_UserColumnName="UnitPrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UnitInStock" msprop:Generator_ColumnVarNameInTable="columnUnitInStock" msprop:Generator_ColumnPropNameInRow="UnitInStock" msprop:Generator_ColumnPropNameInTable="UnitInStockColumn" msprop:Generator_UserColumnName="UnitInStock" type="xs:int" minOccurs="0" />
+              <xs:element name="MaxStock" msprop:Generator_ColumnVarNameInTable="columnMaxStock" msprop:Generator_ColumnPropNameInRow="MaxStock" msprop:Generator_ColumnPropNameInTable="MaxStockColumn" msprop:Generator_UserColumnName="MaxStock" type="xs:int" minOccurs="0" />
+              <xs:element name="MinStock" msprop:Generator_ColumnVarNameInTable="columnMinStock" msprop:Generator_ColumnPropNameInRow="MinStock" msprop:Generator_ColumnPropNameInTable="MinStockColumn" msprop:Generator_UserColumnName="MinStock" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="Categories_Products" msdata:parent="Categories" msdata:child="Products" msdata:parentkey="CategoryId" msdata:childkey="CategoryId" msprop:Generator_UserChildTable="Products" msprop:Generator_ChildPropName="GetProductsRows" msprop:Generator_UserRelationName="Categories_Products" msprop:Generator_ParentPropName="CategoriesRow" msprop:Generator_RelationVarName="relationCategories_Products" msprop:Generator_UserParentTable="Categories" />
+      <msdata:Relationship name="Products_QuantityPerUnits" msdata:parent="Products" msdata:child="QuantityPerUnits" msdata:parentkey="QuantityPerUnitId" msdata:childkey="QuantityPerUnitId" msprop:Generator_UserChildTable="QuantityPerUnits" msprop:Generator_ChildPropName="GetQuantityPerUnitsRows" msprop:Generator_UserRelationName="Products_QuantityPerUnits" msprop:Generator_RelationVarName="relationProducts_QuantityPerUnits" msprop:Generator_UserParentTable="Products" msprop:Generator_ParentPropName="ProductsRow" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>
