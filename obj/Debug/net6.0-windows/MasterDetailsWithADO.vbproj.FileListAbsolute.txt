@@ -138,3 +138,12 @@ C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\AxShockwave
 C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\ShockwaveFlashObjects.dll
 C:\GitLab\Microsoft\VB\MasterDetailsWithADO\obj\Debug\net6.0-windows\MasterDetailsWithADO.vbproj.AssemblyReference.cache
 C:\GitLab\Microsoft\VB\MasterDetailsWithADO\obj\Debug\net6.0-windows\MasterDetailsWithADO.frmCrystalReportViewer.resources
+C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\System.Web.Services.dll
+C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\System.Runtime.Serialization.Formatters.Soap.dll
+C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\System.EnterpriseServices.dll
+C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\System.Runtime.Remoting.dll
+C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\System.Web.Services.xml
+C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\System.Runtime.Serialization.Formatters.Soap.xml
+C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\System.EnterpriseServices.xml
+C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\System.Runtime.Remoting.xml
+C:\GitLab\Microsoft\VB\MasterDetailsWithADO\bin\Debug\net6.0-windows\System.EnterpriseServices.Wrapper.dll

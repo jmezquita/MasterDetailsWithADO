@@ -812,9 +812,6 @@ Public Class ProductFormApp
         CurrentAction = Action.Search
     End Sub
 
-    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
-        CurrentAction = Action.Filter
-    End Sub
 
     Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles BtnRefresh.Click
 
@@ -912,6 +909,6 @@ Public Class ProductFormApp
     End Sub
 
     Private Sub btnFilter_ButtonClick(sender As Object, e As EventArgs) Handles btnFilter.ButtonClick
-
+        CurrentAction = Action.Filter
     End Sub
 End Class
