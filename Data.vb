@@ -173,6 +173,18 @@ Public Class Data : Implements IData
     End Function
 
 
+    Private Function BulkInsert(Table As DataTable)
+        Using bulkCopy As SqlBulkCopy = New SqlBulkCopy(Cnn.SqlCnn)
+            bulkCopy.DestinationTableName = "dbo.Products"
+            Try
+                bulkCopy.WriteToServer(Table)
+
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+        End Using
+    End Function
 
 
     Private Function UpdateBuider(tableName As String, parameterfilter As List(Of Parameter), parameters As List(Of Parameter)) As String

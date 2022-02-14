@@ -41,10 +41,6 @@ Public Class Cnn : Implements ICnn
 #End Region
 
 
-
-
-
-
 #Region "Functions"
 
     ''' <summary>

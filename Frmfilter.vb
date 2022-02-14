@@ -62,6 +62,7 @@
 
     Private Sub btnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
         filteredId = If(gridData.Rows(gridData.CurrentCell.RowIndex).Cells(0).Value.ToString().Trim(), 0)
+        Close()
     End Sub
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click

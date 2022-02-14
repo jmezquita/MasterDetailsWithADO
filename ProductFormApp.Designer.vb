@@ -22,15 +22,14 @@ Partial Class ProductFormApp
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProductFormApp))
         Me.dtgDetails = New System.Windows.Forms.DataGridView()
         Me.ProductId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProductName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QuantityPerUnitId = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UnitInStock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MaxStock = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -88,7 +87,7 @@ Partial Class ProductFormApp
         Me.dtgDetails.AllowUserToOrderColumns = True
         Me.dtgDetails.ColumnHeadersHeight = 50
         Me.dtgDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.dtgDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ProductId, Me.ProductName, Me.QuantityPerUnitId, Me.UnitPrice, Me.UnitInStock, Me.MaxStock, Me.MinStock})
+        Me.dtgDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ProductId, Me.ProductName, Me.UnitPrice, Me.UnitInStock, Me.MaxStock, Me.MinStock})
         Me.dtgDetails.Location = New System.Drawing.Point(9, 255)
         Me.dtgDetails.Name = "dtgDetails"
         Me.dtgDetails.RowHeadersWidth = 20
@@ -98,6 +97,7 @@ Partial Class ProductFormApp
         '
         'ProductId
         '
+        Me.ProductId.DataPropertyName = "ProductId"
         Me.ProductId.HeaderText = "Código"
         Me.ProductId.Name = "ProductId"
         Me.ProductId.Width = 70
@@ -105,49 +105,49 @@ Partial Class ProductFormApp
         'ProductName
         '
         Me.ProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ProductName.DataPropertyName = "ProductName"
         Me.ProductName.HeaderText = "Nombre"
         Me.ProductName.Name = "ProductName"
         '
-        'QuantityPerUnitId
-        '
-        Me.QuantityPerUnitId.HeaderText = "Cantidad/Unidad"
-        Me.QuantityPerUnitId.Name = "QuantityPerUnitId"
-        '
         'UnitPrice
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        DataGridViewCellStyle5.NullValue = "0.00"
-        Me.UnitPrice.DefaultCellStyle = DataGridViewCellStyle5
+        Me.UnitPrice.DataPropertyName = "UnitPrice"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle1.Format = "N2"
+        DataGridViewCellStyle1.NullValue = "0.00"
+        Me.UnitPrice.DefaultCellStyle = DataGridViewCellStyle1
         Me.UnitPrice.HeaderText = "Precio/Unidad"
         Me.UnitPrice.Name = "UnitPrice"
         '
         'UnitInStock
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle6.Format = "N0"
-        DataGridViewCellStyle6.NullValue = "0"
-        Me.UnitInStock.DefaultCellStyle = DataGridViewCellStyle6
+        Me.UnitInStock.DataPropertyName = "UnitInStock"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.Format = "N0"
+        DataGridViewCellStyle2.NullValue = "0"
+        Me.UnitInStock.DefaultCellStyle = DataGridViewCellStyle2
         Me.UnitInStock.HeaderText = "Cantidad/Stock"
         Me.UnitInStock.Name = "UnitInStock"
         Me.UnitInStock.Width = 50
         '
         'MaxStock
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "N0"
-        DataGridViewCellStyle7.NullValue = "0"
-        Me.MaxStock.DefaultCellStyle = DataGridViewCellStyle7
+        Me.MaxStock.DataPropertyName = "MaxStock"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Format = "N0"
+        DataGridViewCellStyle3.NullValue = "0"
+        Me.MaxStock.DefaultCellStyle = DataGridViewCellStyle3
         Me.MaxStock.HeaderText = "Max/Stock"
         Me.MaxStock.Name = "MaxStock"
         Me.MaxStock.Width = 50
         '
         'MinStock
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N0"
-        DataGridViewCellStyle8.NullValue = "0"
-        Me.MinStock.DefaultCellStyle = DataGridViewCellStyle8
+        Me.MinStock.DataPropertyName = "MinStock"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N0"
+        DataGridViewCellStyle4.NullValue = "0"
+        Me.MinStock.DefaultCellStyle = DataGridViewCellStyle4
         Me.MinStock.HeaderText = "Min/Stock"
         Me.MinStock.Name = "MinStock"
         Me.MinStock.Width = 50
@@ -188,7 +188,7 @@ Partial Class ProductFormApp
         '
         Me.QuitarElFiltroToolStripMenuItem.Image = CType(resources.GetObject("QuitarElFiltroToolStripMenuItem.Image"), System.Drawing.Image)
         Me.QuitarElFiltroToolStripMenuItem.Name = "QuitarElFiltroToolStripMenuItem"
-        Me.QuitarElFiltroToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.QuitarElFiltroToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.QuitarElFiltroToolStripMenuItem.Text = "Quitar el Filtro"
         '
         'BtnRefresh
@@ -419,6 +419,7 @@ Partial Class ProductFormApp
         '
         'txtCodigo
         '
+        Me.txtCodigo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtCodigo.Location = New System.Drawing.Point(85, 30)
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(100, 23)
@@ -444,6 +445,7 @@ Partial Class ProductFormApp
         '
         'txtDescripcion
         '
+        Me.txtDescripcion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtDescripcion.Location = New System.Drawing.Point(85, 88)
         Me.txtDescripcion.Multiline = True
         Me.txtDescripcion.Name = "txtDescripcion"
@@ -461,6 +463,7 @@ Partial Class ProductFormApp
         '
         'txtNombre
         '
+        Me.txtNombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtNombre.Location = New System.Drawing.Point(85, 59)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(454, 23)
@@ -525,13 +528,6 @@ Partial Class ProductFormApp
 
     End Sub
     Friend WithEvents dtgDetails As DataGridView
-    Friend WithEvents ProductId As DataGridViewTextBoxColumn
-    Friend WithEvents ProductName As DataGridViewTextBoxColumn
-    Friend WithEvents QuantityPerUnitId As DataGridViewComboBoxColumn
-    Friend WithEvents UnitPrice As DataGridViewTextBoxColumn
-    Friend WithEvents UnitInStock As DataGridViewTextBoxColumn
-    Friend WithEvents MaxStock As DataGridViewTextBoxColumn
-    Friend WithEvents MinStock As DataGridViewTextBoxColumn
     Friend WithEvents ToolStripMenu As ToolStrip
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents StatusStrip1 As StatusStrip
@@ -572,4 +568,10 @@ Partial Class ProductFormApp
     Friend WithEvents tsCurrentPosition As ToolStripStatusLabel
     Friend WithEvents Filtradossss As ToolStripStatusLabel
     Friend WithEvents Filtrados As ToolStripStatusLabel
+    Friend WithEvents ProductId As DataGridViewTextBoxColumn
+    Friend WithEvents ProductName As DataGridViewTextBoxColumn
+    Friend WithEvents UnitPrice As DataGridViewTextBoxColumn
+    Friend WithEvents UnitInStock As DataGridViewTextBoxColumn
+    Friend WithEvents MaxStock As DataGridViewTextBoxColumn
+    Friend WithEvents MinStock As DataGridViewTextBoxColumn
 End Class

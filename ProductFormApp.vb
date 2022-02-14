@@ -1,6 +1,8 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Linq
 Imports System.Transactions
+Imports CrystalDecisions.CrystalReports.Engine
+Imports MasterDetailsWithADO.MasterDetailsWithADO
 
 Public Enum Action
     None = 0
@@ -23,6 +25,7 @@ Public Enum State
     Edit = 3
 End Enum
 
+
 Public Class ProductFormApp
 
 
@@ -33,7 +36,7 @@ Public Class ProductFormApp
 
     Private _CurrentAction As Action
 
-    Private _CurrentPositions As ToolStripItem
+    Private CurrentPositions As Integer = 0
 
 
     Public Property CurrentAction() As Action
@@ -189,9 +192,14 @@ Public Class ProductFormApp
                 Case Action.Search
                     _acept = True
                     _cancel = True
+                    Navigator.BeginInit()
+                    btnMoveFirst.Enabled = False
+                    btnMovePreview.Enabled = False
+                    btnMoveNext.Enabled = False
+                    btnMoveLast.Enabled = False
                     picImage.Image = Nothing
                     State = State.Query
-
+                    dtgDetails.DataSource = Nothing
                 Case Action.Filter
                     If Not ExecuteFilter() Then
                         Return False
@@ -218,30 +226,60 @@ Public Class ProductFormApp
                     _enableImage = True
                     txtCodigo.Enabled = False
                     picImage.Image = Nothing
+
+
+                    'Navigator.MoveFirstItem = btnMoveFirst
+                    'Navigator.MovePreviousItem = btnMovePreview
+                    'Navigator.MoveNextItem = btnMoveNext
+                    ''Navigator.MoveLastItem = btnMoveLast
+                    Navigator.BeginInit()
+                    DetailsTable.BeginInit()
+                    btnMoveFirst.Enabled = False
+                    btnMovePreview.Enabled = False
+                    btnMoveNext.Enabled = False
+                    btnMoveLast.Enabled = False
+                    ' Navigator.EndInit()
+                    _readOnlyDtGrid = False
+
                 Case Action.Edit
                     _acept = True
                     _cancel = True
+
+                    Navigator.BeginInit()
+                    DetailsTable.BeginInit()
+                    btnMoveFirst.Enabled = False
+                    btnMovePreview.Enabled = False
+                    btnMoveNext.Enabled = False
+                    btnMoveLast.Enabled = False
                     State = State.Edit
                     _enableImage = True
                     txtCodigo.Enabled = False
+                    _readOnlyDtGrid = False
 
                 Case Action.Acept
 
+                    AllowLoadChildData = True
+
                     Select Case State
+
                         Case State.Query
                             If Not ExecuteQuery() Then
                                 Throw New Exception
                             End If
-
+                            Navigator.EndInit()
                            ' SetImage()
                         Case State.Insert
                             If Not ExecuteInsert() Then
                                 Throw New Exception
                             End If
+                            Navigator.EndInit()
+                            DetailsTable.EndInit()
                         Case State.Edit
                             If Not ExecuteEdit() Then
                                 Throw New Exception
                             End If
+                            Navigator.EndInit()
+                            DetailsTable.EndInit()
 
                     End Select
 
@@ -255,28 +293,22 @@ Public Class ProductFormApp
                         If m = MsgBoxResult.No Then
                             Return False
                         End If
-
-
-
-                        'Binding.CancelEdit()
-                        'CurrentAction = Action.Refresh
-
                         dtgDetails.AllowUserToAddRows = False
 
-
-                    Else
-
-                        'BindingObject()
                     End If
-
-
-
+                    AllowLoadChildData = True
+                    AllowLoadChildData = True
+                    DetailsTable.EndInit()
+                    Navigator.EndInit()
                     If State <> State.Edit Then
                         ClearObj()
                     End If
 
                     Binding.CancelEdit()
                     CurrentAction = Action.None
+
+
+
                     'BindingObject()
 
                     Return True
@@ -330,12 +362,16 @@ Public Class ProductFormApp
 
     Private Function ExecuteFilter() As Boolean
 
-        Dim frm As New Frmfilter(_dset.Tables(0).AsEnumerable)
-        frm.SetDesktopLocation(Cursor.Position.X, Cursor.Position.Y)
-        If frm.ShowDialog() = DialogResult.OK Then
 
-            Return True
-        End If
+
+        '_dsetFilter
+
+        'Dim frm As New Frmfilter(_dset.Tables(0).AsEnumerable)
+        'frm.SetDesktopLocation(Cursor.Position.X, Cursor.Position.Y)
+        'If frm.ShowDialog() = DialogResult.OK Then
+        '    _dsetFilter = _dset.Tables(0).Rows.Find(frm.filteredId)
+        '    Return True
+        'End If
 
 
         Return False
@@ -404,20 +440,46 @@ Public Class ProductFormApp
     Private Sub ExecutePrint()
         Try
 
+
+
+            Dim Reporte = New ReportClass()
+            Dim r As New report()
+
+            Reporte = r
+            'Reporte.da
+            Reporte.SetDataSource(_dset)
+
+            Dim reportview As New CrystalDecisions.Windows.Forms.CrystalReportViewer With {
+                .ReportSource = Reporte
+            }
+
+
+            reportview.Refresh()
+
+
+            reportview.Dock = DockStyle.Fill
+            Dim frm As New frmCrystalReportViewer()
+            frm.Controls.Add(reportview)
+
+            frm.ShowDialog()
+
+
+
+
         Catch ex As Exception
-            MessageBox.Show(ex.Message, "Error in Delete Action", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(ex.Message, "Error in Print Action", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
     End Sub
 
 
-    Private Function ExecuteQuery() As Boolean
-        If LoadData() Then
-            Return True
-        End If
+    'Private Function ExecuteQuery() As Boolean
+    '    If LoadData() Then
+    '        Return True
+    '    End If
 
-        Return False
-    End Function
+    '    Return False
+    'End Function
 
     Private Function ExecuteInsert() As Boolean
 
@@ -443,7 +505,6 @@ Public Class ProductFormApp
 
                 If _r <= 0 Then
                     Throw New Exception()
-
                 End If
 
                 txtCodigo.Text = _r.ToString()
@@ -464,7 +525,7 @@ Public Class ProductFormApp
 
     Private Function ExecuteEdit() As Boolean
         Try
-            ''Inser master 
+            ''Edit master 
             Using t As New TransactionScope
                 Dim pars As New List(Of Parameter)
                 Dim parsFilter As New List(Of Parameter)
@@ -477,30 +538,51 @@ Public Class ProductFormApp
                 pars.Add(New Parameter("CategoryName", txtNombre.Text))
                 pars.Add(New Parameter("CategoryDescription", txtDescripcion.Text))
 
-                If Not picImage.Image Is Nothing Then
+                If picImage.Image IsNot Nothing Then
                     pars.Add(New Parameter("CategoryPicture", picImage.Image.ConvertImageToByteArray(), SqlDbType.VarBinary))
                 End If
 
                 parsFilter.Add(New Parameter("CategoryId", txtCodigo.Text, SqlDbType.Int))
 
                 Dim _r = Data.Update("Categories", parsFilter, pars)
-
                 If Not _r Then
                     Throw New Exception()
-
                 End If
 
+                'Edit details
+
+                pars.Clear()
+                parsFilter.Clear()
 
 
-                'Insert Detail
+                dtgDetails.BindingContext(dtgDetails.DataSource).EndCurrentEdit()
+                dtgDetails.CommitEdit(DataGridViewDataErrorContexts.Commit)
+                DetailsTable.AcceptChanges()
+
+                Dim DetailsChanged As DataTable = DetailsTable.GetChanges
 
 
-                '  txtCodigo.Text = _r.ToString()
+
+                DetailsChanged?.AsEnumerable.ToList().ForEach(Sub(r)
+                                                                  pars.Add(New Parameter("ProductName", r("ProductName")))
+                                                                  pars.Add(New Parameter("QuantityPerUnitId", r("QuantityPerUnitId"), SqlDbType.Int))
+                                                                  pars.Add(New Parameter("UnitPrice", r("UnitPrice"), SqlDbType.Decimal))
+                                                                  pars.Add(New Parameter("UnitInStock", r("UnitInStock"), SqlDbType.Int))
+                                                                  pars.Add(New Parameter("MaxStock", r("MaxStock"), SqlDbType.Int))
+                                                                  pars.Add(New Parameter("MinStock", r("MinStock"), SqlDbType.Int))
+
+                                                                  parsFilter.Add(New Parameter("ProductId", r("ProductId")))
+
+                                                                  _r = Data.Update("Products", parsFilter, pars)
+
+                                                                  If Not _r Then
+                                                                      Throw New Exception()
+                                                                  End If
+                                                              End Sub)
+
 
                 t.Complete()
             End Using
-
-
 
             MessageBox.Show($"El registro id {txtCodigo.Text} se ha actualido con exito!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -515,6 +597,7 @@ Public Class ProductFormApp
     Dim _sqlAdapter As SqlDataAdapter
 
     Dim _dset As DataSet
+    Dim _dsetFilter As DataSet
     Private Data As IData
 
 
@@ -534,7 +617,7 @@ Public Class ProductFormApp
 #End Region
 
 
-    Private Function LoadData() As Boolean
+    Private Function ExecuteQuery() As Boolean
 
         Dim _rv As Boolean
         Try
@@ -554,10 +637,16 @@ Public Class ProductFormApp
 
             _idsCurrentfilter.Clear()
             _dset = Data.GetAllData(_strwhere)
+            cbox.DataSource = _dset.Tables("QuantityPerUnits")
+
+
+
+
 
             If _dset.Tables("Categories").Rows.Count > 0 Then
 
                 _idsCurrentfilter.AddRange(_dset.Tables(0).AsEnumerable.Select(Function(x) CInt(x("CategoryId"))).Distinct().ToArray)
+
                 LoadChildData()
                 _rv = True
             Else
@@ -577,17 +666,12 @@ Public Class ProductFormApp
             Navigator.BindingSource = Binding
             BindingObject()
 
-            _CurrentPositions = Navigator.PositionItem
+            'tsCurrentPosition = Navigator.PositionItem
 
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error in execute query Action", MessageBoxButtons.OK, MessageBoxIcon.Error)
             _rv = False
         End Try
-
-
-
-
-
 
         Return _rv
 
@@ -605,8 +689,9 @@ Public Class ProductFormApp
         Navigator.MoveNextItem = btnMoveNext
         Navigator.MoveLastItem = btnMoveLast
         Navigator.AddNewItem = BtnNew
-        Navigator.PositionItem = _CurrentPositions
+        Navigator.PositionItem = tsCurrentPosition
 
+        Navigator.BindingSource = Binding
 
 
         AddHandler Binding.CurrentChanged, AddressOf ChangeHandler
@@ -622,43 +707,97 @@ Public Class ProductFormApp
 
         'LoadData()
 
+
+        cbox.HeaderText = "Cant/ Unit"
+        cbox.DataPropertyName = "QuantityPerUnitId"
+        cbox.DisplayMember = "QuantityPerUnitName"
+        cbox.ValueMember = "QuantityPerUnitId"
+        dtgDetails.AutoGenerateColumns = False
+
+        dtgDetails.Columns.Add(cbox)
         '
+
         ExecuteAction(Action.None)
         ' ChangeState()
     End Sub
 
     Private Sub ChangeHandler(sender As Object, e As EventArgs)
-        'If State = State.None Then
-        SetImage()
 
-        tsCurrentPosition.Text = Binding.Position
-        ' Else
-        ' picImage.Image = Nothing
-        ' End If
+        SetImage()
+        CurrentPositions = Binding.Position
+
+
+
+        'If Not State = State.Query Then
+        '    LoadChildData()
+        'End If
+
+
     End Sub
 
-    Public Sub LoadChildData(Optional Index As Integer = 0)
+    Dim cbox As New DataGridViewComboBoxColumn
 
+    Dim DetailsTable As New DataTable()
+    Public Sub LoadChildData(Optional IdMaster As Integer = 0)
+
+
+
+
+
+
+
+        dtgDetails.DataSource = Nothing
 
         If _dset.Tables("Categories").Rows.Count > 0 Then
-            Dim _parentRow = _dset.Tables("Categories").Rows(Index)
-            Dim _childRows = _parentRow.GetChildRows("CategoryProduct")
 
-            Dim _chilstable As New DataTable()
-            _chilstable = _dset.Tables("Products").Clone()
+            Dim _parentRow As DataRow = Nothing
+
+            If IdMaster > 0 Then
+
+                _parentRow = _dset.Tables("Categories").Rows.Find(IdMaster)
 
 
-            _childRows.ToList().ForEach(Function(v)
-                                            _chilstable.ImportRow(v)
-                                            Return True
-                                        End Function)
+            End If
 
 
 
-            dtgDetails.DataSource = _chilstable
 
+            'If State = State.Query Then
+            '    _parentRow = _dset.Tables("Categories").Rows(0)
+            'Else
+            '    Dim litp As New List(Of Integer)
+            '    litp = _dset.Tables("Categories").AsEnumerable().Select(Function(t) _dset.Tables("Categories").Rows.IndexOf(t)).ToList()
+            '    If litp.Contains(Binding.Position) Then
+            '        _parentRow = _dset.Tables("Categories").Rows(Binding.Position)
+            '    End If
+
+            'End If
+
+
+            If _parentRow IsNot Nothing Then
+                Dim _childRows = _parentRow.GetChildRows("CategoryProduct")
+
+
+                DetailsTable = _dset.Tables("Products").Clone()
+
+
+                _childRows.ToList().ForEach(Function(v)
+                                                DetailsTable.ImportRow(v)
+                                                Return True
+                                            End Function)
+
+
+
+                DetailsTable.AcceptChanges()
+                dtgDetails.DataSource = DetailsTable
+
+
+                ' FillCbox()
+
+            End If
 
         End If
+
 
 
 
@@ -673,9 +812,6 @@ Public Class ProductFormApp
         CurrentAction = Action.Search
     End Sub
 
-    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
-        CurrentAction = Action.Filter
-    End Sub
 
     Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles BtnRefresh.Click
 
@@ -723,7 +859,8 @@ Public Class ProductFormApp
     End Sub
     Private Sub SetImage()
 
-        Dim _arr = Binding.Current()?(3)
+
+        Dim _arr = Binding?.Current()?(3)
 
         If _arr IsNot DBNull.Value AndAlso
             _arr IsNot Nothing AndAlso
@@ -732,17 +869,46 @@ Public Class ProductFormApp
         Else
             picImage.Image = Nothing
         End If
-
-
-        '  Dim _arr As Byte() = Binding.Current()(3)
-
-
     End Sub
+
+    Dim AllowLoadChildData As Boolean = True
     Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
+
+        If Not String.IsNullOrEmpty(txtCodigo.Text) AndAlso AllowLoadChildData Then
+
+            LoadChildData(CInt(txtCodigo.Text))
+
+        Else
+            LoadChildData()
+        End If
 
     End Sub
 
     Private Sub QuitarElFiltroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitarElFiltroToolStripMenuItem.Click
         Refresh()
+    End Sub
+
+    Private Sub ProductFormApp_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+
+    End Sub
+
+    Private Sub ProductFormApp_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+
+    End Sub
+
+
+
+
+
+    Private Sub txtCodigo_Enter(sender As Object, e As EventArgs) Handles txtCodigo.Enter
+        AllowLoadChildData = False
+    End Sub
+
+    Private Sub txtCodigo_Leave(sender As Object, e As EventArgs) Handles txtCodigo.Leave
+        AllowLoadChildData = True
+    End Sub
+
+    Private Sub btnFilter_ButtonClick(sender As Object, e As EventArgs) Handles btnFilter.ButtonClick
+        CurrentAction = Action.Filter
     End Sub
 End Class
